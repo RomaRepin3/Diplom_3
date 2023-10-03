@@ -4,14 +4,6 @@ import pageobjects.RegistrationPage;
 
 public class RegistrationPageTest extends BaseTest {
 
-    private static final String testUserName = "test_user";
-
-    private static final String testUserEmail = "test@test.com";
-
-    private static final String testUserPassword = "Qwerty12345!";
-
-    private static final String invalidUserPassword = "12345";
-
     @Test
     public void successRegister() {
         //given

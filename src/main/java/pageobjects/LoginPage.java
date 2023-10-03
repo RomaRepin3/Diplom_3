@@ -33,6 +33,7 @@ public class LoginPage extends BasePage {
      *<H3>Проверка страницы авторизации.</H3>
      */
     public void checkLoginPage() {
+        baseCheck();
         waitVisibilityOfElementLocated(emailField);
         waitVisibilityOfElementLocated(passwordField);
         waitVisibilityOfElementLocated(loginButton);
@@ -54,6 +55,11 @@ public class LoginPage extends BasePage {
      */
     public void fillPasswordField(String password) {
         fillField(passwordField, password);
+    }
+
+    public void fillLoginPage(String email, String password) {
+        fillEmailField(email);
+        fillPasswordField(password);
     }
 
     /**

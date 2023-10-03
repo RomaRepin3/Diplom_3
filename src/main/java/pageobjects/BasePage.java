@@ -12,8 +12,11 @@ public abstract class BasePage {
 
     private final WebDriver driver;
 
+    // логотип в хедере
+    private final By logoButton = By.cssSelector("header div svg");
+
     // кнопка "Личный кабинет" в хедере
-    final By personalCabinetButton = By.xpath("//p[text()='Личный Кабинет']");
+    private final By personalCabinetButton = By.xpath("//p[text()='Личный Кабинет']");
 
     // кнопка "Войти" на странице регистрации и восстановления пароля
     protected final By loginButton = By.cssSelector("p.text_type_main-default > a");
@@ -29,6 +32,14 @@ public abstract class BasePage {
      */
     protected void getUrl(String url) {
         driver.get(url);
+    }
+
+    /**
+     * <H3>Проверка хедера страницы.</H3>
+     */
+    protected void baseCheck() {
+        waitVisibilityOfElementLocated(logoButton);
+        waitVisibilityOfElementLocated(personalCabinetButton);
     }
 
     /**
@@ -61,6 +72,13 @@ public abstract class BasePage {
     protected void fillField(By elementSelector, String text) {
         driver.findElement(elementSelector).clear();
         driver.findElement(elementSelector).sendKeys(text);
+    }
+
+    /**
+     * <H3>Нажатие на логотип в хедере.</H3>
+     */
+    public void clickLogoButton() {
+        clickElement(logoButton);
     }
 
     /**
