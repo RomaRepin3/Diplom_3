@@ -2,12 +2,21 @@ import org.junit.Test;
 import pageobjects.LoginPage;
 import pageobjects.MainPage;
 import pageobjects.PersonalCabinetPage;
+import pageobjects.RegistrationPage;
+import requests.ManageUsers;
+import utils.DtoFactory;
 
+
+/**
+ * <H2>Тесты авториазции.</H2>
+ */
 public class LoginTest extends BaseTest {
 
     @Test
     public void loginByLoginButtonOnMainPage() {
         //given
+        ManageUsers.createUser(DtoFactory.getUserRegisterDto(testUserName, testUserEmail, testUserPassword));
+
         MainPage mainPage = new MainPage(driver);
         mainPage.openMainPage();
         mainPage.checkMainPage(false);
@@ -24,11 +33,15 @@ public class LoginTest extends BaseTest {
         mainPage.clickPersonalCabinetButton();
         PersonalCabinetPage personalCabinetPage = new PersonalCabinetPage(driver);
         personalCabinetPage.checkPersonalCabinetPage(testUserName, testUserEmail);
+
+        ManageUsers.deleteUser(DtoFactory.getUserAuthorizationDto(testUserEmail, testUserPassword));
     }
 
     @Test
     public void loginByPersonalCabinetButton() {
         //given
+        ManageUsers.createUser(DtoFactory.getUserRegisterDto(testUserName, testUserEmail, testUserPassword));
+
         MainPage mainPage = new MainPage(driver);
         mainPage.openMainPage();
         mainPage.checkMainPage(false);
@@ -45,6 +58,31 @@ public class LoginTest extends BaseTest {
         mainPage.clickPersonalCabinetButton();
         PersonalCabinetPage personalCabinetPage = new PersonalCabinetPage(driver);
         personalCabinetPage.checkPersonalCabinetPage(testUserName, testUserEmail);
+        ManageUsers.deleteUser(DtoFactory.getUserAuthorizationDto(testUserEmail, testUserPassword));
     }
 
+    @Test
+    public void loginByLoginButtonOnRegistrationPage() {
+        //given
+        ManageUsers.createUser(DtoFactory.getUserRegisterDto(testUserName, testUserEmail, testUserPassword));
+
+        RegistrationPage registrationPage = new RegistrationPage(driver);
+        registrationPage.openRegistrationPage();
+        registrationPage.checkRegistrationPage(false);
+
+        //when
+        registrationPage.clickLoginButton();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.fillLoginPage(testUserEmail, testUserPassword);
+        loginPage.clickLoginButton();
+
+        //then
+        MainPage mainPage = new MainPage(driver);
+        mainPage.checkMainPage(true);
+        mainPage.clickPersonalCabinetButton();
+        PersonalCabinetPage personalCabinetPage = new PersonalCabinetPage(driver);
+        personalCabinetPage.checkPersonalCabinetPage(testUserName, testUserEmail);
+
+        ManageUsers.deleteUser(DtoFactory.getUserAuthorizationDto(testUserEmail, testUserPassword));
+    }
 }

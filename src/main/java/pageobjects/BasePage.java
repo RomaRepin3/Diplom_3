@@ -12,6 +12,9 @@ public abstract class BasePage {
 
     private final WebDriver driver;
 
+    // кнопка "Конструктор"
+    private final By constructorButton = By.xpath("//p[text()='Конструктор']");
+
     // логотип в хедере
     private final By logoButton = By.cssSelector("header div svg");
 
@@ -38,6 +41,7 @@ public abstract class BasePage {
      * <H3>Проверка хедера страницы.</H3>
      */
     protected void baseCheck() {
+        waitVisibilityOfElementLocated(constructorButton);
         waitVisibilityOfElementLocated(logoButton);
         waitVisibilityOfElementLocated(personalCabinetButton);
     }
@@ -50,7 +54,7 @@ public abstract class BasePage {
     protected void waitVisibilityOfElementLocated(By elementSelector) {
         new WebDriverWait(
                 driver,
-                Duration.ofSeconds(3)).until(ExpectedConditions.presenceOfElementLocated(elementSelector)
+                Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(elementSelector)
         );
     }
 
@@ -72,6 +76,13 @@ public abstract class BasePage {
     protected void fillField(By elementSelector, String text) {
         driver.findElement(elementSelector).clear();
         driver.findElement(elementSelector).sendKeys(text);
+    }
+
+    /**
+     * <H3>Нажатие кнопки "Конструктор" в хедере.</H3>
+     */
+    public void clickConstructorButton() {
+        clickElement(constructorButton);
     }
 
     /**

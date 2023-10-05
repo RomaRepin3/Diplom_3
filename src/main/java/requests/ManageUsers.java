@@ -1,5 +1,6 @@
 package requests;
 
+import dto.UserAuthorizationDto;
 import dto.UserRegisterDto;
 
 import static io.restassured.RestAssured.given;
@@ -19,7 +20,6 @@ public class ManageUsers {
     private static final String AUTH_HEADER = "Authorization";
 
     private static final String ACCESS_TOKEN = "accessToken";
-    private static final String TOKEN = "token";
 
     /**
      * <H3>Регистрация нового пользователя через API.</H3>
@@ -39,11 +39,29 @@ public class ManageUsers {
     }
 
     /**
-     * <H3>Удаление пользователя по токену авторизации.</H3>
+     * <H3>Получение токена автризации пользователя.</H3>
      *
-     * @param accessToken Токен ваторизации.
+     * @param body DTO с данными для автризации пользователя.
+     * @return Токен аторизации.
      */
-    public static void deleteUser(String accessToken) {
+    public static String getAuthToken(UserAuthorizationDto body) {
+        return given()
+                .header(CONTENT_TYPE, APPLICATION_JSON)
+                .body(body)
+                .when()
+                .post(LOGIN_USER_URL)
+                .then()
+                .extract()
+                .path(ACCESS_TOKEN);
+    }
+
+    /**
+     * <H3>Удаление пользователя по email и паролю.</H3>
+     *
+     * @param userAuthorizationDto DTO с данными для авторизации.
+     */
+    public static void deleteUser(UserAuthorizationDto userAuthorizationDto) {
+        String accessToken = getAuthToken(userAuthorizationDto);
         given().header(AUTH_HEADER, accessToken).delete(DELETE_USER_URL);
     }
 }

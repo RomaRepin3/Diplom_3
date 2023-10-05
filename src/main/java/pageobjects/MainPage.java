@@ -9,6 +9,15 @@ import org.openqa.selenium.WebDriver;
  */
 public class MainPage extends BasePage {
 
+    // таб "Булки" на главной странице
+    private final By rollsTab = By.xpath("//span[text()='Булки']");
+
+    // таб "Соусы" на главной странице
+    private final By saucesTab = By.xpath("//span[text()='Соусы']");
+
+    // таб "Начинки" на главной странице
+    private final By fillingsTab = By.xpath("//span[text()='Начинки']");
+
     // кнопка "Войти в аккаунт" на главной странице
     private final By loginToAccountButton = By.xpath("//button[text()='Войти в аккаунт']");
 
@@ -31,12 +40,36 @@ public class MainPage extends BasePage {
      */
     public void checkMainPage(boolean has_authenticated) {
         baseCheck();
+        waitVisibilityOfElementLocated(rollsTab);
+        waitVisibilityOfElementLocated(saucesTab);
+        waitVisibilityOfElementLocated(fillingsTab);
         if (!has_authenticated) {
             waitVisibilityOfElementLocated(loginToAccountButton);
         }
         else {
             waitVisibilityOfElementLocated(placeOrderButton);
         }
+    }
+
+    /**
+     * <H3>Нажитие таба "Булки".</H3>
+     */
+    public void clickRollsTab() {
+        clickElement(rollsTab);
+    }
+
+    /**
+     * <H3>Нажатие таба "Соусы".</H3>
+     */
+    public void clickSaucesTab() {
+        clickElement(saucesTab);
+    }
+
+    /**
+     * <H3>Нажатие таба "Начинки".</H3>
+     */
+    public void clickFillingsTab() {
+        clickElement(fillingsTab);
     }
 
     /**

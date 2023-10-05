@@ -21,6 +21,9 @@ public class RegistrationPage extends BasePage{
     // ошибка при невалидном пароле
     private final By passwordErrorLabel = By.xpath("//p[text()='Некорректный пароль']");
 
+    // кнопка "Зарегистрироваться"
+    private final By registrationButton = By.xpath("//button[text()='Зарегистрироваться']");
+
     public RegistrationPage(WebDriver driver) {
         super(driver);
     }
@@ -35,10 +38,11 @@ public class RegistrationPage extends BasePage{
     /**
      * <H3>Проверка страницы регистрации.</H3>
      */
-    public void checkPasswordRecoveryPage(boolean has_password_error) {
+    public void checkRegistrationPage(boolean has_password_error) {
         waitVisibilityOfElementLocated(nameField);
         waitVisibilityOfElementLocated(emailField);
         waitVisibilityOfElementLocated(passwordField);
+        waitVisibilityOfElementLocated(registrationButton);
         waitVisibilityOfElementLocated(loginButton);
 
         if (has_password_error) {
@@ -77,6 +81,13 @@ public class RegistrationPage extends BasePage{
         fillNameField(name);
         fillEmailField(email);
         fillPasswordField(password);
+    }
+
+    /**
+     * <H3>Нажатие кнопки "Зарегистрироваться".</H3>
+     */
+    public void clickRegistrationButton() {
+        clickElement(registrationButton);
     }
 
     /**
