@@ -72,4 +72,11 @@ public class PersonalCabinetPage extends BasePage{
         waitVisibilityOfElementLocated(cancelButton);
         waitVisibilityOfElementLocated(saveButton);
     }
+
+    /**
+     * <H3>Нажитие ссылки "Выход".</H3>
+     */
+    public void clickExitLink() {
+        clickElement(exitLink);
+    }
 }

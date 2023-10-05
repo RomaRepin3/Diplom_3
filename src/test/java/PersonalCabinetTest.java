@@ -58,4 +58,29 @@ public class PersonalCabinetTest extends BaseTest{
 
         ManageUsers.deleteUser(DtoFactory.getUserAuthorizationDto(testUserEmail, testUserPassword));
     }
+
+    @Test
+    public void logout() {
+        //given
+        ManageUsers.createUser(DtoFactory.getUserRegisterDto(testUserName, testUserEmail, testUserPassword));
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.openLoginPage();
+        loginPage.checkLoginPage();
+        loginPage.fillLoginPage(testUserEmail, testUserPassword);
+        loginPage.clickLoginButton();
+        MainPage mainPage = new MainPage(driver);
+        mainPage.checkMainPage(true);
+        mainPage.clickPersonalCabinetButton();
+        PersonalCabinetPage personalCabinetPage = new PersonalCabinetPage(driver);
+        personalCabinetPage.checkPersonalCabinetPage(testUserName, testUserEmail);
+
+        //when
+        personalCabinetPage.clickExitLink();
+
+        //then
+        loginPage.checkLoginPage();
+
+        ManageUsers.deleteUser(DtoFactory.getUserAuthorizationDto(testUserEmail, testUserPassword));
+    }
 }
