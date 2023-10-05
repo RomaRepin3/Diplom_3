@@ -1,8 +1,5 @@
 import org.junit.Test;
-import pageobjects.LoginPage;
-import pageobjects.MainPage;
-import pageobjects.PersonalCabinetPage;
-import pageobjects.RegistrationPage;
+import pageobjects.*;
 import requests.ManageUsers;
 import utils.DtoFactory;
 
@@ -72,6 +69,31 @@ public class LoginTest extends BaseTest {
 
         //when
         registrationPage.clickLoginButton();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.fillLoginPage(testUserEmail, testUserPassword);
+        loginPage.clickLoginButton();
+
+        //then
+        MainPage mainPage = new MainPage(driver);
+        mainPage.checkMainPage(true);
+        mainPage.clickPersonalCabinetButton();
+        PersonalCabinetPage personalCabinetPage = new PersonalCabinetPage(driver);
+        personalCabinetPage.checkPersonalCabinetPage(testUserName, testUserEmail);
+
+        ManageUsers.deleteUser(DtoFactory.getUserAuthorizationDto(testUserEmail, testUserPassword));
+    }
+
+    @Test
+    public void loginByLoginButtonOnPasswordRecoveryPage() {
+        //given
+        ManageUsers.createUser(DtoFactory.getUserRegisterDto(testUserName, testUserEmail, testUserPassword));
+
+        PasswordRecoveryPage passwordRecoveryPage = new PasswordRecoveryPage(driver);
+        passwordRecoveryPage.openPasswordRecoveryPage();
+        passwordRecoveryPage.checkPasswordRecoveryPage();
+
+        //when
+        passwordRecoveryPage.clickLoginButton();
         LoginPage loginPage = new LoginPage(driver);
         loginPage.fillLoginPage(testUserEmail, testUserPassword);
         loginPage.clickLoginButton();
