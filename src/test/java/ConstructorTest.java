@@ -21,4 +21,20 @@ public class ConstructorTest extends BaseTest{
         mainPage.checkMainPage(false, MainPageConstructorSections.ROLLS);
 
     }
+
+    @Test
+    public void goToSaucesSection() {
+
+        //given
+        MainPage mainPage = new MainPage(driver);
+        mainPage.openMainPage();
+        mainPage.checkMainPage(false);
+
+        //when
+        mainPage.clickSaucesTab();
+
+        //then
+        mainPage.checkMainPage(false, MainPageConstructorSections.SAUCES);
+
+    }
 }
