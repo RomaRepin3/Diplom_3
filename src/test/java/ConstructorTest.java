@@ -8,7 +8,6 @@ import pageobjects.MainPageConstructorSections;
 /**
  * <H2>Тесты конструктора на Главной странице.</H2>
  */
-@Epic("Раздел \"Конструктор\"")
 public class ConstructorTest extends BaseTest{
 
     @Test
@@ -31,6 +30,7 @@ public class ConstructorTest extends BaseTest{
     }
 
     @Test
+    @Epic("Раздел \"Конструктор\"")
     @DisplayName("Переход к разделу \"Соусы\"")
     public void goToSaucesSection() {
 
@@ -48,6 +48,7 @@ public class ConstructorTest extends BaseTest{
     }
 
     @Test
+    @Epic("Раздел \"Конструктор\"")
     @DisplayName("Переход к разделу \"Начинки\"")
     public void goToFillingsSection() {
 

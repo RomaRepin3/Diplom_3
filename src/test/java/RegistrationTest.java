@@ -10,10 +10,10 @@ import utils.DtoFactory;
 /**
  * <H2>Тесты регистрации.</H2>
  */
-@Epic("Регистрация")
 public class RegistrationTest extends BaseTest {
 
     @Test
+    @Epic("Регистрация")
     @DisplayName("Успешная регистрация")
     public void successRegister() {
         //given
@@ -53,6 +53,7 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test
+    @Epic("Регистрация")
     @DisplayName("Ошибка при регистрации: некорректный пароль")
     public void getErrorWithInvalidPassword() {
         //given

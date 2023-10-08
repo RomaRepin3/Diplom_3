@@ -11,10 +11,10 @@ import utils.DtoFactory;
 /**
  * <H2>Тесты для личного кабинета.</H2>
  */
-@Epic("Личный кабинет")
 public class PersonalCabinetTest extends BaseTest{
 
     @Test
+    @Epic("Личный кабинет")
     @DisplayName("Переход в личный кабинет")
     public void goToPersonalCabinet() {
         //given
@@ -39,6 +39,7 @@ public class PersonalCabinetTest extends BaseTest{
     }
 
     @Test
+    @Epic("Личный кабинет")
     @DisplayName("Переход из личного кабинета в конструктор")
     public void goToConstructorFromPersonalCabinet() {
         //given
@@ -65,6 +66,7 @@ public class PersonalCabinetTest extends BaseTest{
     }
 
     @Test
+    @Epic("Личный кабинет")
     @DisplayName("Выход из аккаунта")
     public void logout() {
         //given

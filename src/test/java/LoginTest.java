@@ -9,10 +9,10 @@ import utils.DtoFactory;
 /**
  * <H2>Тесты авториазции.</H2>
  */
-@Epic("Авторизация")
 public class LoginTest extends BaseTest {
 
     @Test
+    @Epic("Авторизация")
     @DisplayName("Вход по конпке \"Войти\" на главной")
     public void loginByLoginButtonOnMainPage() {
         //given
@@ -39,6 +39,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @Epic("Авторизация")
     @DisplayName("Вход через кнопку личный кабинет")
     public void loginByPersonalCabinetButton() {
         //given
@@ -64,6 +65,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @Epic("Авторизация")
     @DisplayName("Вход через кнопку в форме регистрации")
     public void loginByLoginButtonOnRegistrationPage() {
         //given
@@ -90,6 +92,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @Epic("Авторизация")
     @DisplayName("Вход через кнопку  форме осстановления пароля")
     public void loginByLoginButtonOnPasswordRecoveryPage() {
         //given
