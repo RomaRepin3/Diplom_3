@@ -1,5 +1,6 @@
 package pageobjects;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -44,6 +45,7 @@ public class LoginPage extends BasePage {
      *
      * @param email Значение email.
      */
+    @Step("Заполнить поле email начением {email}")
     public void fillEmailField(String email) {
         fillField(emailField, email);
     }
@@ -53,10 +55,12 @@ public class LoginPage extends BasePage {
      *
      * @param password Значение пароля.
      */
+    @Step("Заполнить поле пароль значением {password}")
     public void fillPasswordField(String password) {
         fillField(passwordField, password);
     }
 
+    @Step("Заполнить страницу авторизации значениями email {email}  пароля {password}")
     public void fillLoginPage(String email, String password) {
         fillEmailField(email);
         fillPasswordField(password);
@@ -65,6 +69,7 @@ public class LoginPage extends BasePage {
     /**
      *<H3>Нажатие кнопки "Войти".</H3>
      */
+    @Step("Нажать кнопку входа на странице автризации")
     public void clickLoginButton() {
         clickElement(loginButton);
     }

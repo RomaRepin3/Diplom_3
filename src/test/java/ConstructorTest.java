@@ -1,10 +1,18 @@
+import io.qameta.allure.Epic;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 import pageobjects.MainPage;
 import pageobjects.MainPageConstructorSections;
 
+
+/**
+ * <H2>Тесты конструктора на Главной странице.</H2>
+ */
+@Epic("Раздел \"Конструктор\"")
 public class ConstructorTest extends BaseTest{
 
     @Test
+    @DisplayName("Переход к разделу \"Булки\"")
     public void goToRollsSection() {
 
         //given
@@ -23,6 +31,7 @@ public class ConstructorTest extends BaseTest{
     }
 
     @Test
+    @DisplayName("Переход к разделу \"Соусы\"")
     public void goToSaucesSection() {
 
         //given
@@ -39,6 +48,7 @@ public class ConstructorTest extends BaseTest{
     }
 
     @Test
+    @DisplayName("Переход к разделу \"Начинки\"")
     public void goToFillingsSection() {
 
         //given

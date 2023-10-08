@@ -1,5 +1,6 @@
 package pageobjects;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -25,6 +26,7 @@ public class PasswordRecoveryPage extends BasePage {
     /**
      * <H3>Открытие страницы восстановления пароля.</H3>
      */
+    @Step("Открыть страницу восстановления пароля")
     public void openPasswordRecoveryPage() {
         getUrl("https://stellarburgers.nomoreparties.site/forgot-password");
     }
@@ -32,6 +34,7 @@ public class PasswordRecoveryPage extends BasePage {
     /**
      * <H3>Проверка страницы восстановления пароля.</H3>
      */
+    @Step("Проверить страницу восстановления пароля")
     public void checkPasswordRecoveryPage() {
         baseCheck();
         waitVisibilityOfElementLocated(passwordRecoveryLabel);
@@ -43,6 +46,7 @@ public class PasswordRecoveryPage extends BasePage {
     /**
      * <H3>Нажатие кнопки "Войти".</H3>
      */
+    @Step("Нажать кнопку входа на странице восстановления пароля")
     public void clickLoginButton() {
         clickElement(loginButton);
     }

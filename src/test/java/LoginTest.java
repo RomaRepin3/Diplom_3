@@ -1,3 +1,5 @@
+import io.qameta.allure.Epic;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 import pageobjects.*;
 import requests.ManageUsers;
@@ -7,9 +9,11 @@ import utils.DtoFactory;
 /**
  * <H2>Тесты авториазции.</H2>
  */
+@Epic("Авторизация")
 public class LoginTest extends BaseTest {
 
     @Test
+    @DisplayName("Вход по конпке \"Войти\" на главной")
     public void loginByLoginButtonOnMainPage() {
         //given
         ManageUsers.createUser(DtoFactory.getUserRegisterDto(testUserName, testUserEmail, testUserPassword));
@@ -35,6 +39,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Вход через кнопку личный кабинет")
     public void loginByPersonalCabinetButton() {
         //given
         ManageUsers.createUser(DtoFactory.getUserRegisterDto(testUserName, testUserEmail, testUserPassword));
@@ -59,6 +64,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Вход через кнопку в форме регистрации")
     public void loginByLoginButtonOnRegistrationPage() {
         //given
         ManageUsers.createUser(DtoFactory.getUserRegisterDto(testUserName, testUserEmail, testUserPassword));
@@ -84,6 +90,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Вход через кнопку  форме осстановления пароля")
     public void loginByLoginButtonOnPasswordRecoveryPage() {
         //given
         ManageUsers.createUser(DtoFactory.getUserRegisterDto(testUserName, testUserEmail, testUserPassword));

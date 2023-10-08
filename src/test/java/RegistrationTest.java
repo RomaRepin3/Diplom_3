@@ -1,3 +1,5 @@
+import io.qameta.allure.Epic;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Assert;
 import org.junit.Test;
 import pageobjects.LoginPage;
@@ -8,9 +10,11 @@ import utils.DtoFactory;
 /**
  * <H2>Тесты регистрации.</H2>
  */
+@Epic("Регистрация")
 public class RegistrationTest extends BaseTest {
 
     @Test
+    @DisplayName("Успешная регистрация")
     public void successRegister() {
         //given
         String accessToken = ManageUsers.getAuthToken(
@@ -49,6 +53,7 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Ошибка при регистрации: некорректный пароль")
     public void getErrorWithInvalidPassword() {
         //given
         RegistrationPage registrationPage = new RegistrationPage(driver);

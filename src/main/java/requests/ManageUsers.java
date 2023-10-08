@@ -2,6 +2,7 @@ package requests;
 
 import dto.UserAuthorizationDto;
 import dto.UserRegisterDto;
+import io.qameta.allure.Step;
 
 import static io.restassured.RestAssured.given;
 
@@ -27,6 +28,7 @@ public class ManageUsers {
      * @param body DTO с данными для регистрации нового пользователя.
      * @return Токен авторизации.
      */
+    @Step("Создать нового пользователя через API")
     public static String createUser(UserRegisterDto body) {
         return given()
                 .header(CONTENT_TYPE, APPLICATION_JSON)
@@ -44,6 +46,7 @@ public class ManageUsers {
      * @param body DTO с данными для автризации пользователя.
      * @return Токен аторизации.
      */
+    @Step("Получить токен автризации пользователя через API")
     public static String getAuthToken(UserAuthorizationDto body) {
         return given()
                 .header(CONTENT_TYPE, APPLICATION_JSON)
@@ -60,6 +63,7 @@ public class ManageUsers {
      *
      * @param userAuthorizationDto DTO с данными для авторизации.
      */
+    @Step("Удалить пользователя через API")
     public static void deleteUser(UserAuthorizationDto userAuthorizationDto) {
         String accessToken = getAuthToken(userAuthorizationDto);
         given().header(AUTH_HEADER, accessToken).delete(DELETE_USER_URL);

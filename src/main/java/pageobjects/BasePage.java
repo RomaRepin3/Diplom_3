@@ -1,5 +1,6 @@
 package pageobjects;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -33,6 +34,7 @@ public abstract class BasePage {
      *
      * @param url Адрес для перехода.
      */
+    @Step("Перейти на URL: {url}")
     protected void getUrl(String url) {
         driver.get(url);
     }
@@ -40,6 +42,7 @@ public abstract class BasePage {
     /**
      * <H3>Проверка хедера страницы.</H3>
      */
+    @Step("Проверить хедер страницы")
     protected void baseCheck() {
         waitVisibilityOfElementLocated(constructorButton);
         waitVisibilityOfElementLocated(logoButton);
@@ -51,6 +54,7 @@ public abstract class BasePage {
      *
      * @param elementSelector Селектор элемента для проверки.
      */
+    @Step("Дождаться видимости отображения элемента {elementSelector}")
     protected void waitVisibilityOfElementLocated(By elementSelector) {
         new WebDriverWait(
                 driver,
@@ -63,6 +67,7 @@ public abstract class BasePage {
      *
      * @param elementSelector Селектор элемента.
      */
+    @Step("Кликнуть на элемент {elementSelector}")
     protected void clickElement(By elementSelector) {
         driver.findElement(elementSelector).click();
     }
@@ -73,6 +78,7 @@ public abstract class BasePage {
      * @param elementSelector Селектор поля.
      * @param text Текст для ввода.
      */
+    @Step("Очиста и заполнение поля {elementSelector} текстом {text}")
     protected void fillField(By elementSelector, String text) {
         driver.findElement(elementSelector).clear();
         driver.findElement(elementSelector).sendKeys(text);
@@ -81,6 +87,7 @@ public abstract class BasePage {
     /**
      * <H3>Нажатие кнопки "Конструктор" в хедере.</H3>
      */
+    @Step("Нажать кнопку \"Конструктор\" в хедере")
     public void clickConstructorButton() {
         clickElement(constructorButton);
     }
@@ -88,6 +95,7 @@ public abstract class BasePage {
     /**
      * <H3>Нажатие на логотип в хедере.</H3>
      */
+    @Step("Нажать на логотип в хедере")
     public void clickLogoButton() {
         clickElement(logoButton);
     }
@@ -95,6 +103,7 @@ public abstract class BasePage {
     /**
      * <H3>Нажатие кнопки "Личный кабинет" в хедере.</H3>
      */
+    @Step("Нажать кнопку \"Личный кабинет\" в хедере")
     public void clickPersonalCabinetButton() {
         clickElement(personalCabinetButton);
     }

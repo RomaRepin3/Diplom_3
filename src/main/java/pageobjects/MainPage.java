@@ -1,5 +1,6 @@
 package pageobjects;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -80,6 +81,7 @@ public class MainPage extends BasePage {
     /**
      * <H3>Открытие Главной страницы.</H3>
      */
+    @Step("Открыть главную страницу")
     public void openMainPage() {
         getUrl("https://stellarburgers.nomoreparties.site");
     }
@@ -89,6 +91,7 @@ public class MainPage extends BasePage {
      *
      * @param has_authenticated Признак авторизации пользователя.
      */
+    @Step("Проверить Главную страницу, польователь авторизован {has_authenticated}")
     public void checkMainPage(boolean has_authenticated) {
         checkMainPage(has_authenticated, MainPageConstructorSections.ROLLS);
     }
@@ -99,6 +102,9 @@ public class MainPage extends BasePage {
      * @param has_authenticated Признак авторизации пользователя.
      * @param checkingSection Текущая отображаемая секция в конструкторе.
      */
+    @Step(
+            "Проверить главную страницу, пользователь авторизован {has_authenticated}, текущий раздел конструктора {checkingSection}"
+    )
     public void checkMainPage(boolean has_authenticated, MainPageConstructorSections checkingSection) {
 
         baseCheck();
@@ -139,8 +145,9 @@ public class MainPage extends BasePage {
     }
 
     /**
-     * <H3>Нажитие таба "Булки".</H3>
+     * <H3>Нажатие таба "Булки".</H3>
      */
+    @Step("Нажать таб \"Булки\"")
     public void clickRollsTab() {
 
         clickElement(rollsTab);
@@ -149,6 +156,7 @@ public class MainPage extends BasePage {
     /**
      * <H3>Нажатие таба "Соусы".</H3>
      */
+    @Step("Нажать таб \"Соусы\"")
     public void clickSaucesTab() {
 
         clickElement(saucesTab);
@@ -158,6 +166,7 @@ public class MainPage extends BasePage {
     /**
      * <H3>Нажатие таба "Начинки".</H3>
      */
+    @Step("Нажать таб \"Начинки\"")
     public void clickFillingsTab() {
 
         clickElement(fillingsTab);
@@ -166,6 +175,7 @@ public class MainPage extends BasePage {
     /**
      * <H3>Нажатие кнопки "Войти в аккаунт".</H3>
      */
+    @Step("Нажать кнопку \"Войти в аккаунт\"")
     public void clickLoginToAccountButton() {
 
         clickElement(loginToAccountButton);

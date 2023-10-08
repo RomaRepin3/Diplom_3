@@ -1,5 +1,6 @@
 package pageobjects;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -47,6 +48,7 @@ public class PersonalCabinetPage extends BasePage{
      * @param user_name Имя пользователя.
      * @param login Логин пользователя.
      */
+    @Step("Проверить страницу личного кабинета, имя пользователя {user_name}, логин {login}")
     public void checkPersonalCabinetPage(String user_name, String login) {
 
         // паттрен для формирования XPath селекторов для полей Имя и Логин
@@ -76,6 +78,7 @@ public class PersonalCabinetPage extends BasePage{
     /**
      * <H3>Нажитие ссылки "Выход".</H3>
      */
+    @Step("Нажать ссылку выхода на странице личного кабинета")
     public void clickExitLink() {
         clickElement(exitLink);
     }

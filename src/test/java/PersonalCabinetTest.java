@@ -1,3 +1,5 @@
+import io.qameta.allure.Epic;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 import pageobjects.LoginPage;
 import pageobjects.MainPage;
@@ -9,9 +11,11 @@ import utils.DtoFactory;
 /**
  * <H2>Тесты для личного кабинета.</H2>
  */
+@Epic("Личный кабинет")
 public class PersonalCabinetTest extends BaseTest{
 
     @Test
+    @DisplayName("Переход в личный кабинет")
     public void goToPersonalCabinet() {
         //given
         ManageUsers.createUser(DtoFactory.getUserRegisterDto(testUserName, testUserEmail, testUserPassword));
@@ -35,6 +39,7 @@ public class PersonalCabinetTest extends BaseTest{
     }
 
     @Test
+    @DisplayName("Переход из личного кабинета в конструктор")
     public void goToConstructorFromPersonalCabinet() {
         //given
         ManageUsers.createUser(DtoFactory.getUserRegisterDto(testUserName, testUserEmail, testUserPassword));
@@ -60,6 +65,7 @@ public class PersonalCabinetTest extends BaseTest{
     }
 
     @Test
+    @DisplayName("Выход из аккаунта")
     public void logout() {
         //given
         ManageUsers.createUser(DtoFactory.getUserRegisterDto(testUserName, testUserEmail, testUserPassword));

@@ -1,5 +1,6 @@
 package pageobjects;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -31,6 +32,7 @@ public class RegistrationPage extends BasePage{
     /**
      * <H3>Открытие страницы регистрации.</H3>
      */
+    @Step("Открыть страницу регистрации")
     public void openRegistrationPage() {
         getUrl("https://stellarburgers.nomoreparties.site/register");
     }
@@ -38,6 +40,7 @@ public class RegistrationPage extends BasePage{
     /**
      * <H3>Проверка страницы регистрации.</H3>
      */
+    @Step("Проверить страницу регистрации, отображение ошибки валидации пароля {has_password_error}")
     public void checkRegistrationPage(boolean has_password_error) {
         waitVisibilityOfElementLocated(nameField);
         waitVisibilityOfElementLocated(emailField);
@@ -55,6 +58,7 @@ public class RegistrationPage extends BasePage{
      *
      * @param name Имя пользователя.
      */
+    @Step("Заполнение поля ввода имени на странице регистрации значением {name}")
     public void fillNameField(String name) {
         fillField(nameField, name);
     }
@@ -64,6 +68,7 @@ public class RegistrationPage extends BasePage{
      *
      * @param email email пользователя.
      */
+    @Step("Заполнение поля ввода email на странице регистрации значением {email}")
     public void fillEmailField(String email) {
         fillField(emailField, email);
     }
@@ -73,10 +78,19 @@ public class RegistrationPage extends BasePage{
      *
      * @param password Пароль пользователя.
      */
+    @Step("Заполнение поля ввода пароля на странице регистрации значением {password}")
     public void fillPasswordField(String password) {
         fillField(passwordField, password);
     }
 
+    /**
+     * <H3>Заполнение страницы регистрации.</H3>
+     *
+     * @param name Имя пользователя.
+     * @param email email адрес пользователя.
+     * @param password Пароль пользователя.
+     */
+    @Step("Заполнение страницы регистрации, имя {name}, email {email}, пароль {password}")
     public void fillRegistrationPage(String name, String email, String password) {
         fillNameField(name);
         fillEmailField(email);
@@ -86,6 +100,7 @@ public class RegistrationPage extends BasePage{
     /**
      * <H3>Нажатие кнопки "Зарегистрироваться".</H3>
      */
+    @Step("Нажать кнопку \"Зарегистрироваться\" на странице регистрации")
     public void clickRegistrationButton() {
         clickElement(registrationButton);
     }
@@ -93,6 +108,7 @@ public class RegistrationPage extends BasePage{
     /**
      * <H3>Нажатие кнопки "Войти".</H3>
      */
+    @Step("Нажать кнопку \"Войти\" на странице регистрации")
     public void clickLoginButton() {
         clickElement(loginButton);
     }
