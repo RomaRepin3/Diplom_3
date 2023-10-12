@@ -1,5 +1,8 @@
 import io.qameta.allure.Epic;
 import io.qameta.allure.junit4.DisplayName;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import pageobjects.*;
 import requests.ManageUsers;
@@ -11,13 +14,21 @@ import utils.DtoFactory;
  */
 public class LoginTest extends BaseTest {
 
+    @Before
+    public void createTestUser() {
+        ManageUsers.createUser(DtoFactory.getUserRegisterDto(testUserName, testUserEmail, testUserPassword));
+    }
+
+    @After
+    public void deleteTestUser() {
+        ManageUsers.deleteUser(DtoFactory.getUserAuthorizationDto(testUserEmail, testUserPassword));
+    }
+
     @Test
     @Epic("Авторизация")
     @DisplayName("Вход по конпке \"Войти\" на главной")
     public void loginByLoginButtonOnMainPage() {
         //given
-        ManageUsers.createUser(DtoFactory.getUserRegisterDto(testUserName, testUserEmail, testUserPassword));
-
         MainPage mainPage = new MainPage(driver);
         mainPage.openMainPage();
         mainPage.checkMainPage(false);
@@ -33,9 +44,9 @@ public class LoginTest extends BaseTest {
         mainPage.checkMainPage(true);
         mainPage.clickPersonalCabinetButton();
         PersonalCabinetPage personalCabinetPage = new PersonalCabinetPage(driver);
-        personalCabinetPage.checkPersonalCabinetPage(testUserName, testUserEmail);
-
-        ManageUsers.deleteUser(DtoFactory.getUserAuthorizationDto(testUserEmail, testUserPassword));
+        personalCabinetPage.checkPersonalCabinetPage();
+        Assert.assertEquals(testUserName, personalCabinetPage.getNameValue());
+        Assert.assertEquals(testUserEmail, personalCabinetPage.getEmailValue());
     }
 
     @Test
@@ -43,8 +54,6 @@ public class LoginTest extends BaseTest {
     @DisplayName("Вход через кнопку личный кабинет")
     public void loginByPersonalCabinetButton() {
         //given
-        ManageUsers.createUser(DtoFactory.getUserRegisterDto(testUserName, testUserEmail, testUserPassword));
-
         MainPage mainPage = new MainPage(driver);
         mainPage.openMainPage();
         mainPage.checkMainPage(false);
@@ -60,8 +69,9 @@ public class LoginTest extends BaseTest {
         mainPage.checkMainPage(true);
         mainPage.clickPersonalCabinetButton();
         PersonalCabinetPage personalCabinetPage = new PersonalCabinetPage(driver);
-        personalCabinetPage.checkPersonalCabinetPage(testUserName, testUserEmail);
-        ManageUsers.deleteUser(DtoFactory.getUserAuthorizationDto(testUserEmail, testUserPassword));
+        personalCabinetPage.checkPersonalCabinetPage();
+        Assert.assertEquals(testUserName, personalCabinetPage.getNameValue());
+        Assert.assertEquals(testUserEmail, personalCabinetPage.getEmailValue());
     }
 
     @Test
@@ -69,8 +79,6 @@ public class LoginTest extends BaseTest {
     @DisplayName("Вход через кнопку в форме регистрации")
     public void loginByLoginButtonOnRegistrationPage() {
         //given
-        ManageUsers.createUser(DtoFactory.getUserRegisterDto(testUserName, testUserEmail, testUserPassword));
-
         RegistrationPage registrationPage = new RegistrationPage(driver);
         registrationPage.openRegistrationPage();
         registrationPage.checkRegistrationPage(false);
@@ -86,9 +94,9 @@ public class LoginTest extends BaseTest {
         mainPage.checkMainPage(true);
         mainPage.clickPersonalCabinetButton();
         PersonalCabinetPage personalCabinetPage = new PersonalCabinetPage(driver);
-        personalCabinetPage.checkPersonalCabinetPage(testUserName, testUserEmail);
-
-        ManageUsers.deleteUser(DtoFactory.getUserAuthorizationDto(testUserEmail, testUserPassword));
+        personalCabinetPage.checkPersonalCabinetPage();
+        Assert.assertEquals(testUserName, personalCabinetPage.getNameValue());
+        Assert.assertEquals(testUserEmail, personalCabinetPage.getEmailValue());
     }
 
     @Test
@@ -96,8 +104,6 @@ public class LoginTest extends BaseTest {
     @DisplayName("Вход через кнопку  форме осстановления пароля")
     public void loginByLoginButtonOnPasswordRecoveryPage() {
         //given
-        ManageUsers.createUser(DtoFactory.getUserRegisterDto(testUserName, testUserEmail, testUserPassword));
-
         PasswordRecoveryPage passwordRecoveryPage = new PasswordRecoveryPage(driver);
         passwordRecoveryPage.openPasswordRecoveryPage();
         passwordRecoveryPage.checkPasswordRecoveryPage();
@@ -113,8 +119,8 @@ public class LoginTest extends BaseTest {
         mainPage.checkMainPage(true);
         mainPage.clickPersonalCabinetButton();
         PersonalCabinetPage personalCabinetPage = new PersonalCabinetPage(driver);
-        personalCabinetPage.checkPersonalCabinetPage(testUserName, testUserEmail);
-
-        ManageUsers.deleteUser(DtoFactory.getUserAuthorizationDto(testUserEmail, testUserPassword));
+        personalCabinetPage.checkPersonalCabinetPage();
+        Assert.assertEquals(testUserName, personalCabinetPage.getNameValue());
+        Assert.assertEquals(testUserEmail, personalCabinetPage.getEmailValue());
     }
 }

@@ -4,69 +4,28 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.concurrent.TimeUnit;
+
 
 /**
  * <H2>Класс главной страницы.</H2>
  */
 public class MainPage extends BasePage {
 
+    // длительность ожидания после переключения в конструкторе
+    private final int afterClickTabTimeout = 1;
+
     // таб "Булки" на главной странице
     private final By rollsTab = By.xpath("//span[text()='Булки']");
-
-    // надпись "Булки" в конструкторе
-    private final By rollsLabel = By.xpath("//h2[text()='Булки']");
-
-    // изображение "Флюоресцентная булка" в конструкторе
-    private final By fluorescentRollImage = By.cssSelector("img[alt='Флюоресцентная булка R2-D3']");
-
-    // надпись "Флюоресцентная булка" в конструкторе
-    private final By fluorescentRollLabel = By.xpath("//p[text()='Флюоресцентная булка R2-D3']");
-
-    // изображение "Краторная булка" в конструкторе
-    private final By craterRollImage = By.cssSelector("img[alt='Краторная булка N-200i']");
-
-    // надпись "Краторная булка" в конструкторе
-    private final By craterRollLabel = By.xpath("//p[text()='Краторная булка N-200i']");
 
     // таб "Соусы" на главной странице
     private final By saucesTab = By.xpath("//span[text()='Соусы']");
 
-    // надпись "Соусы" в конструкторе
-    private final By saucesLabel = By.xpath("//h2[text()='Соусы']");
-
-    // изображение "Соус Spicy-X" в конструкторе
-    private final By spicyXSauceImage = By.cssSelector("img[alt='Соус Spicy-X']");
-
-    // надпись "Соус Spicy-X" в конструкторе
-    private final By spicyXSauceLabel = By.xpath("//p[text()='Соус Spicy-X']");
-
-    // изображение "Соус фирменный Space Sauce" в конструкторе
-    private final By brandedSauceSpaceSauceImage = By.cssSelector("img[alt='Соус фирменный Space Sauce']");
-
-    // надпись "Соус фирменный Space Sauce" в конструкторе
-    private final By brandedSauceSpaceSauceLabel = By.xpath("//p[text()='Соус фирменный Space Sauce']");
-
     // таб "Начинки" на главной странице
     private final By fillingsTab = By.xpath("//span[text()='Начинки']");
 
-    // надпись "Начинки" в конструкторе
-    private final By fillingsLabel = By.xpath("//h2[text()='Начинки']");
-
-    // изображение "Мясо бессмертных моллюсков Protostomia" в конструкторе
-    private final By immortalMollusksProtostomiaMeatFillingImage = By.cssSelector(
-            "img[alt='Мясо бессмертных моллюсков Protostomia']"
-    );
-
-    // надпись "Мясо бессмертных моллюсков Protostomia" в конструкторе
-    private final By immortalMollusksProtostomiaMeatFillingLabel = By.xpath(
-            "//p[text()='Мясо бессмертных моллюсков Protostomia']"
-    );
-
-    // изображение "Говяжий метеорит (отбивная)" в конструкторе
-    private final By beefMeteoriteChopFillingImage = By.cssSelector("img[alt='Говяжий метеорит (отбивная)']");
-
-    // надпись "Говяжий метеорит (отбивная)" в конструкторе
-    private final By beefMeteoriteChopFillingLabel = By.xpath("//p[text()='Говяжий метеорит (отбивная)']");
+    // активный таб конструктора
+    private final By activeTab = By.cssSelector(".tab_tab_type_current__2BEPc span");
 
     // кнопка "Войти в аккаунт" на главной странице
     private final By loginToAccountButton = By.xpath("//button[text()='Войти в аккаунт']");
@@ -87,25 +46,12 @@ public class MainPage extends BasePage {
     }
 
     /**
-     * <H3>Проверка Главной страницы с отображением конструктора по умолчанию</H3>
-     *
-     * @param has_authenticated Признак авторизации пользователя.
-     */
-    @Step("Проверить Главную страницу, польователь авторизован {has_authenticated}")
-    public void checkMainPage(boolean has_authenticated) {
-        checkMainPage(has_authenticated, MainPageConstructorSections.ROLLS);
-    }
-
-    /**
      *<H3>Проверка Главной страницы с указанием текущего раздела в конструкторе.</H3>
      *
      * @param has_authenticated Признак авторизации пользователя.
-     * @param checkingSection Текущая отображаемая секция в конструкторе.
      */
-    @Step(
-            "Проверить главную страницу, пользователь авторизован {has_authenticated}, текущий раздел конструктора {checkingSection}"
-    )
-    public void checkMainPage(boolean has_authenticated, MainPageConstructorSections checkingSection) {
+    @Step("Проверить главную страницу, пользователь авторизован {has_authenticated}")
+    public void checkMainPage(boolean has_authenticated) {
 
         baseCheck();
 
@@ -120,46 +66,27 @@ public class MainPage extends BasePage {
             waitVisibilityOfElementLocated(placeOrderButton);
         }
 
-        if (checkingSection == MainPageConstructorSections.ROLLS) {
-            waitVisibilityOfElementLocated(rollsLabel);
-            waitVisibilityOfElementLocated(fluorescentRollImage);
-            waitVisibilityOfElementLocated(fluorescentRollLabel);
-            waitVisibilityOfElementLocated(craterRollImage);
-            waitVisibilityOfElementLocated(craterRollLabel);
-        }
-        if (checkingSection == MainPageConstructorSections.SAUCES) {
-            waitVisibilityOfElementLocated(saucesLabel);
-            waitVisibilityOfElementLocated(spicyXSauceImage);
-            waitVisibilityOfElementLocated(spicyXSauceLabel);
-            waitVisibilityOfElementLocated(brandedSauceSpaceSauceImage);
-            waitVisibilityOfElementLocated(brandedSauceSpaceSauceLabel);
-        }
-        if (checkingSection == MainPageConstructorSections.FILLINGS) {
-            waitVisibilityOfElementLocated(fillingsLabel);
-            waitVisibilityOfElementLocated(immortalMollusksProtostomiaMeatFillingImage);
-            waitVisibilityOfElementLocated(immortalMollusksProtostomiaMeatFillingLabel);
-            waitVisibilityOfElementLocated(beefMeteoriteChopFillingImage);
-            waitVisibilityOfElementLocated(beefMeteoriteChopFillingLabel);
-        }
-
     }
 
     /**
      * <H3>Нажатие таба "Булки".</H3>
      */
     @Step("Нажать таб \"Булки\"")
-    public void clickRollsTab() {
+    public void clickRollsTab() throws InterruptedException {
 
         clickElement(rollsTab);
+        TimeUnit.SECONDS.sleep(afterClickTabTimeout);
+
     }
 
     /**
      * <H3>Нажатие таба "Соусы".</H3>
      */
     @Step("Нажать таб \"Соусы\"")
-    public void clickSaucesTab() {
+    public void clickSaucesTab() throws InterruptedException {
 
         clickElement(saucesTab);
+        TimeUnit.SECONDS.sleep(afterClickTabTimeout);
 
     }
 
@@ -167,9 +94,21 @@ public class MainPage extends BasePage {
      * <H3>Нажатие таба "Начинки".</H3>
      */
     @Step("Нажать таб \"Начинки\"")
-    public void clickFillingsTab() {
+    public void clickFillingsTab() throws InterruptedException {
 
         clickElement(fillingsTab);
+        TimeUnit.SECONDS.sleep(afterClickTabTimeout);
+
+    }
+
+    /**
+     * <H3>Получение названия активного таба.</H3>
+     *
+     * @return Навзание активного таба.
+     */
+    @Step("Получить название активного таба")
+    public String getActiveTabName() {
+        return getTextFromElement(activeTab);
     }
 
     /**

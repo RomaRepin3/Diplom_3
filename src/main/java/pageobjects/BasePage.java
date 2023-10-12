@@ -63,6 +63,39 @@ public abstract class BasePage {
     }
 
     /**
+     * <H3>Получение текста из элемента.</H3>
+     *
+     * @param elementSelector Селектор элемента.
+     * @return Полученный текст.
+     */
+    @Step("Получить текст из элемента {elementSelector}")
+    protected String getTextFromElement(By elementSelector) {
+        return driver.findElement(elementSelector).getText();
+    }
+
+    protected void waitTextToBeValue(By elementSelector, String textValue) {
+        new WebDriverWait(
+                driver,
+                Duration.ofSeconds(5)
+        ).until(
+                ExpectedConditions.textToBePresentInElementLocated(
+                        elementSelector,
+                        textValue
+                )
+        );
+    }
+
+    /**
+     * <H3>Получение значения из поля ввода.</H3>
+     *
+     * @param elementSelector Селектор поля ввода.
+     * @return Текст из поля ввода.
+     */
+    protected String getValueFromElement(By elementSelector) {
+        return driver.findElement(elementSelector).getAttribute("value");
+    }
+
+    /**
      * <H3>Поиск и клик по указанному элементу.</H3>
      *
      * @param elementSelector Селектор элемента.
@@ -82,14 +115,6 @@ public abstract class BasePage {
     protected void fillField(By elementSelector, String text) {
         driver.findElement(elementSelector).clear();
         driver.findElement(elementSelector).sendKeys(text);
-    }
-
-    /**
-     * <H3>Нажатие кнопки "Конструктор" в хедере.</H3>
-     */
-    @Step("Нажать кнопку \"Конструктор\" в хедере")
-    public void clickConstructorButton() {
-        clickElement(constructorButton);
     }
 
     /**

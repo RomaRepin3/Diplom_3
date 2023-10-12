@@ -9,34 +9,14 @@ import org.openqa.selenium.WebDriver;
  */
 public class PersonalCabinetPage extends BasePage{
 
-    // ссылка "Профиль"
-    private final By profileLink = By.xpath("//a[text()='Профиль']");
-
-    // ссылка "История заказов"
-    private final By orderHistoryLink = By.xpath("//a[text()='История заказов']");
-
     // ссылка "Выход"
     private final By exitLink = By.xpath("//button[text()='Выход']");
 
-    // надпись "Имя"
-    private final By nameLabel = By.xpath("//label[text()='Имя']");
+    // поле с именем пользователя
+    private final By nameField = By.cssSelector("ul > li:nth-child(1) input");
 
-    // надпись "Логин"
-    private final By loginLabel = By.xpath("//label[text()='Логин']");
-
-    // надпись "Пароль"
-    private final By passwordLabel = By.xpath("//label[text()='Пароль']");
-
-    // информационное сообщение в личном кабинете
-    private final By helpMessage = By.xpath(
-            "//p[text()='В этом разделе вы можете изменить свои персональные данные']"
-    );
-
-    // кнопка "Отмена"
-    private final By cancelButton = By.xpath("//button[text()='Отмена']");
-
-    // кнопка "Сохранить"
-    private final By saveButton = By.xpath("//button[text()='Сохранить']");
+    // поле с логином пользователя
+    private final By emailField = By.cssSelector("ul > li:nth-child(2) input");
 
     public PersonalCabinetPage(WebDriver driver) {
         super(driver);
@@ -44,35 +24,34 @@ public class PersonalCabinetPage extends BasePage{
 
     /**
      * <H3>Проверка страницы личного кабинета.</H3>
-     *
-     * @param user_name Имя пользователя.
-     * @param login Логин пользователя.
      */
-    @Step("Проверить страницу личного кабинета, имя пользователя {user_name}, логин {login}")
-    public void checkPersonalCabinetPage(String user_name, String login) {
-
-        // паттрен для формирования XPath селекторов для полей Имя и Логин
-        String nameAndLoginSelectorPattern = "//input[@value='%s']";
+    @Step("Проверить страницу личного кабинета")
+    public void checkPersonalCabinetPage() {
 
         baseCheck();
-        waitVisibilityOfElementLocated(profileLink);
-        waitVisibilityOfElementLocated(orderHistoryLink);
         waitVisibilityOfElementLocated(exitLink);
-        waitVisibilityOfElementLocated(nameLabel);
-        waitVisibilityOfElementLocated(
-                By.xpath(String.format(nameAndLoginSelectorPattern, user_name))
-        );
-        waitVisibilityOfElementLocated(loginLabel);
-        waitVisibilityOfElementLocated(
-                By.xpath(String.format(nameAndLoginSelectorPattern, login))
-        );
-        waitVisibilityOfElementLocated(passwordLabel);
-        waitVisibilityOfElementLocated(
-                By.xpath(String.format(nameAndLoginSelectorPattern, "*****"))
-        );
-        waitVisibilityOfElementLocated(helpMessage);
-        waitVisibilityOfElementLocated(cancelButton);
-        waitVisibilityOfElementLocated(saveButton);
+        waitVisibilityOfElementLocated(nameField);
+        waitVisibilityOfElementLocated(emailField);
+    }
+
+    /**
+     * <H3>Получение имени пользователя из поля в личном кабинете.</H3>
+     *
+     * @return Имя пользователя из страницы личного кабинета.
+     */
+    @Step("Получить имя пользователя из поля в Личном кабинете")
+    public String getNameValue() {
+        return getValueFromElement(nameField);
+    }
+
+    /**
+     * <H3>Получение email пользователя из поля в личном кабинете.</H3>
+     *
+     * @return Email пользователя из страницы личного каюбинета.
+     */
+    @Step("Получить email пользователя из поля в Личном кабинете")
+    public String getEmailValue() {
+        return getValueFromElement(emailField);
     }
 
     /**
