@@ -73,18 +73,6 @@ public abstract class BasePage {
         return driver.findElement(elementSelector).getText();
     }
 
-    protected void waitTextToBeValue(By elementSelector, String textValue) {
-        new WebDriverWait(
-                driver,
-                Duration.ofSeconds(5)
-        ).until(
-                ExpectedConditions.textToBePresentInElementLocated(
-                        elementSelector,
-                        textValue
-                )
-        );
-    }
-
     /**
      * <H3>Получение значения из поля ввода.</H3>
      *
